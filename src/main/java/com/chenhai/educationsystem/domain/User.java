@@ -12,6 +12,14 @@ public class User {
     @Column(nullable = false,length = 30)
     private String password;
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User() {
+    }
+
     public String getUsername() {
         return username;
     }

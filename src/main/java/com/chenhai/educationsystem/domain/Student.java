@@ -13,6 +13,15 @@ public class Student {
     @Column(name = "name")
     private String studentName;
 
+    public Student(Integer studentId, Integer remaining, String studentName) {
+        this.studentId = studentId;
+        this.remaining = remaining;
+        this.studentName = studentName;
+    }
+
+    public Student() {
+    }
+
     public Integer getStudentId() {
         return studentId;
     }
