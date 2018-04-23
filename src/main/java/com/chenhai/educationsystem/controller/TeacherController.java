@@ -1,21 +1,21 @@
 package com.chenhai.educationsystem.controller;
 
 import com.chenhai.educationsystem.exception.GlobalException;
-import com.chenhai.educationsystem.service.StudentService;
-import com.chenhai.educationsystem.vo.StudentResult;
+import com.chenhai.educationsystem.service.TeacherService;
+import com.chenhai.educationsystem.vo.TeacherResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/student")
-public class StudentController {
+@RequestMapping("/teacher")
+public class TeacherController {
     @Autowired
-    private StudentService studentService;
+    private TeacherService teacherService;
 
     @PostMapping("/list")
-    public StudentResult list() throws GlobalException {
-        return studentService.list();
+    public TeacherResult list() throws GlobalException {
+        return teacherService.list();
     }
 }

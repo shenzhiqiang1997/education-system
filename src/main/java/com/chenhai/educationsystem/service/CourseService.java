@@ -28,7 +28,7 @@ public class CourseService {
 
             Course course = new Course(courseDto.getCourseName(),courseDto.getTeacherId(),
                     courseDto.getStartTime(),courseDto.getEndTime(),courseDto.getMark(),
-                    courseDto.getCost(),"1对"+studentIds.size());
+                    courseDto.getCost(),String.valueOf(studentIds.size()));
 
             course = courseRepository.saveAndFlush(course);
 
