@@ -1,21 +1,45 @@
-package com.chenhai.educationsystem.vo;
+package com.chenhai.educationsystem.domain;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Consumption {
+    @Id
+    @JsonIgnore
+    private String id;
+    @Column
+    private Float period;
+    @Column
     private String date;
+    @Column
     private String type;
-    private String period;
+    @Column
     private Integer cost;
+    @Column
     private Integer remaining;
 
     public Consumption() {
     }
 
-    public Consumption(String date, String type, String period, Integer cost, Integer remaining) {
-        this.date = date;
-        this.type = type;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Float getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Float period) {
         this.period = period;
-        this.cost = cost;
-        this.remaining = remaining;
     }
 
     public String getDate() {
@@ -32,14 +56,6 @@ public class Consumption {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public String getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(String period) {
-        this.period = period;
     }
 
     public Integer getCost() {

@@ -1,13 +1,11 @@
 package com.chenhai.educationsystem.service;
 
-import com.chenhai.educationsystem.domain.Course;
-import com.chenhai.educationsystem.domain.Student;
-import com.chenhai.educationsystem.domain.TakeCourse;
-import com.chenhai.educationsystem.domain.TakeCourseKey;
+import com.chenhai.educationsystem.domain.*;
 import com.chenhai.educationsystem.dto.CourseDto;
 import com.chenhai.educationsystem.dto.CourseIdDto;
 import com.chenhai.educationsystem.exception.GlobalException;
 import com.chenhai.educationsystem.message.Message;
+import com.chenhai.educationsystem.repository.ClassHourRepository;
 import com.chenhai.educationsystem.repository.CourseRepository;
 import com.chenhai.educationsystem.repository.StudentRepository;
 import com.chenhai.educationsystem.repository.TakeCourseRepository;
@@ -16,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -26,6 +25,9 @@ public class CourseService {
     private TakeCourseRepository takeCourseRepository;
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private ClassHourRepository classHourRepository;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-hh HH:mm:ss");
     @Transactional
     public SuccessResult add(CourseDto courseDto) throws GlobalException {
         try{
@@ -36,8 +38,14 @@ public class CourseService {
                     courseDto.getCost(),String.valueOf(studentIds.size()));
 
             course = courseRepository.saveAndFlush(course);
-
             Integer courseId = course.getId();
+
+            long startTime = sdf.parse(course.getStartTime()).getTime();
+            long endTime = sdf.parse(course.getEndTime()).getTime();
+            Float duration = ((float)(endTime - startTime)/(float)(1000*3600));
+            ClassHour classHour = new ClassHour(courseId,duration);
+            classHourRepository.save(classHour);
+
             for (Integer studentId:
                  studentIds) {
                 Student student = studentRepository.findById(studentId).get();

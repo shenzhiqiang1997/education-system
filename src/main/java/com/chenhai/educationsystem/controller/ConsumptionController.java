@@ -2,7 +2,7 @@ package com.chenhai.educationsystem.controller;
 
 import com.chenhai.educationsystem.dto.StudentIdDto;
 import com.chenhai.educationsystem.exception.GlobalException;
-import com.chenhai.educationsystem.service.ConsumingService;
+import com.chenhai.educationsystem.service.ConsumptionService;
 import com.chenhai.educationsystem.vo.ConsumptionResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/consumption")
 public class ConsumptionController {
     @Autowired
-    private ConsumingService consumingService;
+    private ConsumptionService consumingService;
     @PostMapping("/list")
     public ConsumptionResult list(@RequestBody StudentIdDto studentIdDto) throws GlobalException {
         return consumingService.list(studentIdDto);

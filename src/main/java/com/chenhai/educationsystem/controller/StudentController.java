@@ -31,8 +31,6 @@ public class StudentController {
 
     @PostMapping("/fee")
     public FeeResult fee(@RequestBody FeeDto feeDto) throws GlobalException {
-        System.out.println(feeDto.getEndTime());
-        System.out.println(feeDto.getStudentId());
         return studentService.fee(feeDto);
     }
 }

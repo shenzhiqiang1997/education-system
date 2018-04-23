@@ -1,5 +1,7 @@
 package com.chenhai.educationsystem.vo;
 
+import com.chenhai.educationsystem.domain.Consumption;
+
 import java.util.List;
 
 public class ConsumptionResult {
