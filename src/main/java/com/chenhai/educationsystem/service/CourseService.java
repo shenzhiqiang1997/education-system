@@ -4,6 +4,7 @@ import com.chenhai.educationsystem.domain.Course;
 import com.chenhai.educationsystem.domain.TakeCourse;
 import com.chenhai.educationsystem.domain.TakeCourseKey;
 import com.chenhai.educationsystem.dto.CourseDto;
+import com.chenhai.educationsystem.dto.CourseIdDto;
 import com.chenhai.educationsystem.exception.GlobalException;
 import com.chenhai.educationsystem.message.Message;
 import com.chenhai.educationsystem.repository.CourseRepository;
@@ -42,4 +43,16 @@ public class CourseService {
             throw new GlobalException(Message.ERROR);
         }
     }
-}
+
+    @Transactional
+    public SuccessResult delete(CourseIdDto courseIdDto) throws GlobalException {
+        try {
+            courseRepository.deleteById(courseIdDto.getCourseId());
+            return new SuccessResult();
+        } catch (Exception e){
+            e.printStackTrace();
+            throw new GlobalException(Message.ERROR);
+        }
+    }
+
+    }
