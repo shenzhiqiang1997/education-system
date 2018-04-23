@@ -1,6 +1,7 @@
 package com.chenhai.educationsystem.service;
 
 import com.chenhai.educationsystem.domain.Course;
+import com.chenhai.educationsystem.domain.Student;
 import com.chenhai.educationsystem.domain.TakeCourse;
 import com.chenhai.educationsystem.domain.TakeCourseKey;
 import com.chenhai.educationsystem.dto.CourseDto;
@@ -8,6 +9,7 @@ import com.chenhai.educationsystem.dto.CourseIdDto;
 import com.chenhai.educationsystem.exception.GlobalException;
 import com.chenhai.educationsystem.message.Message;
 import com.chenhai.educationsystem.repository.CourseRepository;
+import com.chenhai.educationsystem.repository.StudentRepository;
 import com.chenhai.educationsystem.repository.TakeCourseRepository;
 import com.chenhai.educationsystem.vo.SuccessResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class CourseService {
     private CourseRepository courseRepository;
     @Autowired
     private TakeCourseRepository takeCourseRepository;
+    @Autowired
+    private StudentRepository studentRepository;
     @Transactional
     public SuccessResult add(CourseDto courseDto) throws GlobalException {
         try{
@@ -36,7 +40,11 @@ public class CourseService {
             Integer courseId = course.getId();
             for (Integer studentId:
                  studentIds) {
-                takeCourseRepository.save(new TakeCourse(new TakeCourseKey(courseId,studentId)));
+                Student student = studentRepository.findById(studentId).get();
+                student.setRemaining(student.getRemaining()-course.getCost());
+                studentRepository.save(student);
+
+                takeCourseRepository.save(new TakeCourse(new TakeCourseKey(courseId,studentId),student.getRemaining()));
             }
             return new SuccessResult();
         } catch (Exception e){
@@ -54,5 +62,4 @@ public class CourseService {
             throw new GlobalException(Message.ERROR);
         }
     }
-
-    }
+}
