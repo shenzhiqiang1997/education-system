@@ -1,6 +1,7 @@
 package com.chenhai.educationsystem.controller;
 
 import com.chenhai.educationsystem.domain.User;
+import com.chenhai.educationsystem.dto.RoleDto;
 import com.chenhai.educationsystem.exception.GlobalException;
 import com.chenhai.educationsystem.service.UserService;
 import com.chenhai.educationsystem.vo.SuccessResult;
@@ -19,5 +20,10 @@ public class UserController {
     @PostMapping("/login")
     public SuccessResult login(@RequestBody User user) throws GlobalException {
         return userService.login(user);
+    }
+
+    @PostMapping("/add")
+    public SuccessResult add(@RequestBody RoleDto roleDto) throws GlobalException {
+        return userService.add(roleDto);
     }
 }

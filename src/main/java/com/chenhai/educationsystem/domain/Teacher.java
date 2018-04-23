@@ -1,16 +1,28 @@
 package com.chenhai.educationsystem.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 public class Teacher {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private Integer teacherId;
     @Column(name = "name")
     private String teacherName;
+    @Column
+    @JsonIgnore
+    private String code;
+
+    public Teacher(String teacherName, String code) {
+        this.teacherName = teacherName;
+        this.code = code;
+    }
+
+    public Teacher() {
+    }
 
     public Integer getTeacherId() {
         return teacherId;
@@ -26,5 +38,13 @@ public class Teacher {
 
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

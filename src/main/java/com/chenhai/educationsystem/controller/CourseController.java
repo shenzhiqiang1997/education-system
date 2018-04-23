@@ -1,6 +1,7 @@
 package com.chenhai.educationsystem.controller;
 
 import com.chenhai.educationsystem.dto.CourseDto;
+import com.chenhai.educationsystem.dto.CourseIdDto;
 import com.chenhai.educationsystem.exception.GlobalException;
 import com.chenhai.educationsystem.service.CourseService;
 import com.chenhai.educationsystem.vo.SuccessResult;
@@ -19,5 +20,10 @@ public class CourseController {
     @PostMapping("/add")
     public SuccessResult add(@RequestBody CourseDto courseDto) throws GlobalException {
         return courseService.add(courseDto);
+    }
+
+    @PostMapping("/delete")
+    public SuccessResult delete(@RequestBody CourseIdDto courseIdDto) throws GlobalException {
+        return courseService.delete(courseIdDto);
     }
 }
