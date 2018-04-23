@@ -55,13 +55,13 @@ public class UserService {
             if (Role.STUDENT.equalsIgnoreCase(character)){
                 Student student = new Student();
                 student.setStudentName(name);
-                student.setCode(code);
+                student.setMark(code);
                 studentRepository.save(student);
                 return new SuccessResult();
             } else if (Role.TEACHER.equalsIgnoreCase(character)){
                 Teacher teacher = new Teacher();
                 teacher.setTeacherName(name);
-                teacher.setCode(code);
+                teacher.setMark(code);
                 teacherRepository.save(teacher);
                 return new SuccessResult();
             } else if (Role.PARENT.equalsIgnoreCase(character)){

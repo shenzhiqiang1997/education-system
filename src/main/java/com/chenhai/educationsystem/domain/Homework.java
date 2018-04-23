@@ -9,13 +9,16 @@ public class Homework {
     @Column
     private Integer id;
     @Column
+    private String name;
+    @Column
     private String content;
     @Column
     private String date;
     @Column
     private String pics;
 
-    public Homework(String content, String date, String pics) {
+    public Homework(String name, String content, String date, String pics) {
+        this.name = name;
         this.content = content;
         this.date = date;
         this.pics = pics;
@@ -30,6 +33,14 @@ public class Homework {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getContent() {

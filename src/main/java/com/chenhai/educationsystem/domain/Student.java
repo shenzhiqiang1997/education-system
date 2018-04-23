@@ -16,7 +16,7 @@ public class Student {
     private String studentName;
     @Column
     @JsonIgnore
-    private String code;
+    private String mark;
 
     public Student(Integer studentId, Integer remaining, String studentName) {
         this.studentId = studentId;
@@ -24,9 +24,9 @@ public class Student {
         this.studentName = studentName;
     }
 
-    public Student(String studentName, String code) {
+    public Student(String studentName, String mark) {
         this.studentName = studentName;
-        this.code = code;
+        this.mark = mark;
     }
 
     public Student() {
@@ -56,11 +56,11 @@ public class Student {
         this.studentName = studentName;
     }
 
-    public String getCode() {
-        return code;
+    public String getMark() {
+        return mark;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setMark(String mark) {
+        this.mark = mark;
     }
 }

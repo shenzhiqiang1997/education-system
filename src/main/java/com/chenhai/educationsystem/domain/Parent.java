@@ -12,12 +12,12 @@ public class Parent {
     @Column(name = "studentId")
     private Integer studentId;
     @Column
-    private String code;
+    private String mark;
 
-    public Parent(String name, Integer studentId, String code) {
+    public Parent(String name, Integer studentId, String mark) {
         this.name = name;
         this.studentId = studentId;
-        this.code = code;
+        this.mark = mark;
     }
 
     public Parent() {
@@ -35,8 +35,8 @@ public class Parent {
         this.studentId = studentId;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setMark(String mark) {
+        this.mark = mark;
     }
 
     public Integer getId() {
@@ -51,7 +51,7 @@ public class Parent {
         return studentId;
     }
 
-    public String getCode() {
-        return code;
+    public String getMark() {
+        return mark;
     }
 }

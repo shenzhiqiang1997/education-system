@@ -17,8 +17,9 @@ public class HomeworkController {
     private HomeworkService homeworkService;
 
     @PostMapping("/add")
-    public SuccessResult add(@RequestParam("pics")MultipartFile multipartFile, @RequestParam("content")String content,
+    public SuccessResult add(@RequestParam("pics")MultipartFile multipartFile, @RequestParam("name")String name,
+                             @RequestParam("content")String content,
                              @RequestParam("date")String date) throws GlobalException {
-        return homeworkService.add(multipartFile,content,date);
+        return homeworkService.add(multipartFile,name,content,date);
     }
 }

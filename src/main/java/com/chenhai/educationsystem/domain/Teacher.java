@@ -14,11 +14,11 @@ public class Teacher {
     private String teacherName;
     @Column
     @JsonIgnore
-    private String code;
+    private String mark;
 
-    public Teacher(String teacherName, String code) {
+    public Teacher(String teacherName, String mark) {
         this.teacherName = teacherName;
-        this.code = code;
+        this.mark = mark;
     }
 
     public Teacher() {
@@ -40,11 +40,11 @@ public class Teacher {
         this.teacherName = teacherName;
     }
 
-    public String getCode() {
-        return code;
+    public String getMark() {
+        return mark;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setMark(String mark) {
+        this.mark = mark;
     }
 }

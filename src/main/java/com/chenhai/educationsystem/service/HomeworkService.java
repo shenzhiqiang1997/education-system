@@ -21,7 +21,7 @@ public class HomeworkService {
     private HomeworkRepository homeworkRepository;
 
     @Transactional
-    public SuccessResult add(MultipartFile multipartFile,String content,String date) throws GlobalException {
+    public SuccessResult add(MultipartFile multipartFile,String name,String content,String date) throws GlobalException {
         try {
             byte[] bytes = multipartFile.getBytes();
             String pics = BasePath.HOME_WORK_FOLDER + multipartFile.getOriginalFilename();
@@ -32,7 +32,7 @@ public class HomeworkService {
 
             Files.write(path,bytes);
 
-            Homework homework = new Homework(content,date,pics);
+            Homework homework = new Homework(name,content,date,pics);
             homeworkRepository.save(homework);
 
             return new SuccessResult();
