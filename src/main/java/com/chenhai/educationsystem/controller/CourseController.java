@@ -1,7 +1,8 @@
 package com.chenhai.educationsystem.controller;
 
 import com.chenhai.educationsystem.dto.CourseDto;
-import com.chenhai.educationsystem.dto.CourseIdDto;
+import com.chenhai.educationsystem.dto.CourseRelationDto;
+import com.chenhai.educationsystem.dto.RecordDto;
 import com.chenhai.educationsystem.exception.GlobalException;
 import com.chenhai.educationsystem.service.CourseService;
 import com.chenhai.educationsystem.vo.CourseListResult;
@@ -24,12 +25,17 @@ public class CourseController {
     }
 
     @PostMapping("/delete")
-    public SuccessResult delete(@RequestBody CourseIdDto courseIdDto) throws GlobalException {
-        return courseService.delete(courseIdDto);
+    public SuccessResult delete(@RequestBody CourseRelationDto courseRelationDto) throws GlobalException {
+        return courseService.delete(courseRelationDto);
     }
 
     @PostMapping("/list")
     public CourseListResult list() throws GlobalException {
         return courseService.list();
+    }
+
+    @PostMapping("/confirm")
+    public SuccessResult confirm(@RequestBody RecordDto recordDto) throws GlobalException {
+        return courseService.confirm(recordDto);
     }
 }

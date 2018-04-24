@@ -10,7 +10,7 @@ public class Student {
     @Id
     @Column(name = "id")
     private Integer studentId;
-    @Column
+    @Column(name = "remaining")
     private Integer remaining;
     @Column(name = "name")
     private String studentName;

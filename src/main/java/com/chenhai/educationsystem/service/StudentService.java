@@ -23,7 +23,7 @@ public class StudentService {
     private StudentRepository studentRepository;
     @Autowired
     private FeeRepository feeRepository;
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
     public StudentResult list() throws GlobalException{
         try{
             List<Student> studentList = studentRepository.findAll();

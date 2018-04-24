@@ -7,8 +7,6 @@ import javax.persistence.*;
 public class TakeCourse{
     @EmbeddedId
     private TakeCourseKey takeCourseKey;
-    @Column
-    private Integer remaining;
 
     public TakeCourse(TakeCourseKey takeCourseKey){
         this.takeCourseKey =  takeCourseKey;
@@ -16,18 +14,10 @@ public class TakeCourse{
 
     public TakeCourse(TakeCourseKey takeCourseKey, Integer remaining) {
         this.takeCourseKey = takeCourseKey;
-        this.remaining = remaining;
     }
 
     public TakeCourse(){}
 
-    public Integer getRemaining() {
-        return remaining;
-    }
-
-    public void setRemaining(Integer remaining) {
-        this.remaining = remaining;
-    }
 
     public TakeCourseKey getTakeCourseKey() {
         return takeCourseKey;

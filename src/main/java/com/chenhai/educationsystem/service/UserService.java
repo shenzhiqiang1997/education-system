@@ -56,6 +56,7 @@ public class UserService {
                 Student student = new Student();
                 student.setStudentName(name);
                 student.setMark(code);
+                student.setRemaining(0);
                 studentRepository.save(student);
                 return new SuccessResult();
             } else if (Role.TEACHER.equalsIgnoreCase(character)){

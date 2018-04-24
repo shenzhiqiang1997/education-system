@@ -50,6 +50,9 @@ public class TeacherService {
     public TotalClassHourResult totalClassHourByType(TotalClassHourTypeDto totalClassHourTypeDto) throws GlobalException {
         try {
             TotalClassHour totalClassHour=totalClassHourRepository.findByTeacherIdAndType(totalClassHourTypeDto.getTeacherId(), totalClassHourTypeDto.getType());
+            if (totalClassHour == null){
+                return new TotalClassHourResult(0L);
+            }
             return new TotalClassHourResult(totalClassHour.getTotal());
         } catch (Exception e){
             throw new GlobalException(Message.ERROR);

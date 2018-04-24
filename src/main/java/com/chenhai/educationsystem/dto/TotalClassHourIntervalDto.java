@@ -6,9 +6,9 @@ import java.util.Date;
 
 public class TotalClassHourIntervalDto {
     private Integer teacherId;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     private Date startTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mmm")
     private Date endTime;
 
     public Integer getTeacherId() {

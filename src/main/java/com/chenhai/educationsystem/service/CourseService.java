@@ -2,7 +2,8 @@ package com.chenhai.educationsystem.service;
 
 import com.chenhai.educationsystem.domain.*;
 import com.chenhai.educationsystem.dto.CourseDto;
-import com.chenhai.educationsystem.dto.CourseIdDto;
+import com.chenhai.educationsystem.dto.CourseRelationDto;
+import com.chenhai.educationsystem.dto.RecordDto;
 import com.chenhai.educationsystem.exception.GlobalException;
 import com.chenhai.educationsystem.message.Message;
 import com.chenhai.educationsystem.repository.*;
@@ -22,13 +23,17 @@ public class CourseService {
     @Autowired
     private TakeCourseRepository takeCourseRepository;
     @Autowired
-    private StudentRepository studentRepository;
-    @Autowired
     private ClassHourRepository classHourRepository;
     @Autowired
     private CourseListRepository courseListRepository;
+    @Autowired
+    private RecordRepository recordRepository;
+    @Autowired
+    private StudentRepository studentRepository;
+    @Autowired
+    private CourseReferenceRepository courseReferenceRepository;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-hh HH:mm:ss");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/hh HH:mm");
 
     @Transactional
     public SuccessResult add(CourseDto courseDto) throws GlobalException {
@@ -49,26 +54,26 @@ public class CourseService {
             classHourRepository.save(classHour);
 
             for (Integer studentId:
-                 studentIds) {
-                Student student = studentRepository.findById(studentId).get();
-                student.setRemaining(student.getRemaining()-course.getCost());
-                studentRepository.save(student);
+                 studentIds)
+                takeCourseRepository.save(new TakeCourse(new TakeCourseKey(courseId,studentId)));
 
-                takeCourseRepository.save(new TakeCourse(new TakeCourseKey(courseId,studentId),student.getRemaining()));
-            }
+
             return new SuccessResult();
         } catch (Exception e){
             throw new GlobalException(Message.ERROR);
         }
     }
 
-    @Transactional
-    public SuccessResult delete(CourseIdDto courseIdDto) throws GlobalException {
+    public SuccessResult delete(CourseRelationDto courseRelationDto) throws GlobalException {
         try {
-            courseRepository.deleteById(courseIdDto.getCourseId());
+            takeCourseRepository.deleteById(new TakeCourseKey(courseRelationDto.getCourseId(),courseRelationDto.getStudentId()));
+
+            long referenceCount = courseReferenceRepository.countByCourseId(courseRelationDto.getCourseId());
+            if (referenceCount == 0)
+                courseRepository.deleteById(courseRelationDto.getCourseId());
+
             return new SuccessResult();
         } catch (Exception e){
-            e.printStackTrace();
             throw new GlobalException(Message.ERROR);
         }
     }
@@ -77,6 +82,30 @@ public class CourseService {
         try {
             List<CourseList> courseListList = courseListRepository.findAll();
             return new CourseListResult(courseListList);
+        } catch (Exception e){
+            throw new GlobalException(Message.ERROR);
+        }
+    }
+
+    @Transactional
+    public SuccessResult confirm(RecordDto recordDto) throws GlobalException {
+        try {
+            Integer studentId = recordDto.getStudentId();
+            Student student = studentRepository.findByStudentId(studentId);
+            Integer remaining = student.getRemaining();
+            Integer fee = recordDto.getFee();
+            Integer newRemaining = remaining - fee;
+            student.setRemaining(newRemaining);
+            studentRepository.save(student);
+
+            Record record = new Record(recordDto.getStudentId(),recordDto.getCourseId(),recordDto.getTeacherId(),recordDto.getStudent(),
+                    recordDto.getCourseName(),recordDto.getTeacherName(),recordDto.getStartTime(),recordDto.getEndTime(),recordDto.getType(),
+                    recordDto.getFee(),newRemaining);
+            recordRepository.save(record);
+
+            takeCourseRepository.deleteById(new TakeCourseKey(recordDto.getCourseId(),recordDto.getStudentId()));
+
+            return new SuccessResult();
         } catch (Exception e){
             throw new GlobalException(Message.ERROR);
         }
