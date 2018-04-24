@@ -1,9 +1,5 @@
 package com.chenhai.educationsystem.dto;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
-
 public class FeeDto {
     private Integer studentId;
     private String startTime;

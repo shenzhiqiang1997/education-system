@@ -4,6 +4,7 @@ import com.chenhai.educationsystem.dto.CourseDto;
 import com.chenhai.educationsystem.dto.CourseIdDto;
 import com.chenhai.educationsystem.exception.GlobalException;
 import com.chenhai.educationsystem.service.CourseService;
+import com.chenhai.educationsystem.vo.CourseListResult;
 import com.chenhai.educationsystem.vo.SuccessResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,5 +26,10 @@ public class CourseController {
     @PostMapping("/delete")
     public SuccessResult delete(@RequestBody CourseIdDto courseIdDto) throws GlobalException {
         return courseService.delete(courseIdDto);
+    }
+
+    @PostMapping("/list")
+    public CourseListResult list() throws GlobalException {
+        return courseService.list();
     }
 }

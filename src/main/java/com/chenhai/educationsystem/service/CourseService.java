@@ -5,10 +5,8 @@ import com.chenhai.educationsystem.dto.CourseDto;
 import com.chenhai.educationsystem.dto.CourseIdDto;
 import com.chenhai.educationsystem.exception.GlobalException;
 import com.chenhai.educationsystem.message.Message;
-import com.chenhai.educationsystem.repository.ClassHourRepository;
-import com.chenhai.educationsystem.repository.CourseRepository;
-import com.chenhai.educationsystem.repository.StudentRepository;
-import com.chenhai.educationsystem.repository.TakeCourseRepository;
+import com.chenhai.educationsystem.repository.*;
+import com.chenhai.educationsystem.vo.CourseListResult;
 import com.chenhai.educationsystem.vo.SuccessResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +25,11 @@ public class CourseService {
     private StudentRepository studentRepository;
     @Autowired
     private ClassHourRepository classHourRepository;
+    @Autowired
+    private CourseListRepository courseListRepository;
+
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-hh HH:mm:ss");
+
     @Transactional
     public SuccessResult add(CourseDto courseDto) throws GlobalException {
         try{
@@ -67,6 +69,15 @@ public class CourseService {
             return new SuccessResult();
         } catch (Exception e){
             e.printStackTrace();
+            throw new GlobalException(Message.ERROR);
+        }
+    }
+
+    public CourseListResult list() throws GlobalException {
+        try {
+            List<CourseList> courseListList = courseListRepository.findAll();
+            return new CourseListResult(courseListList);
+        } catch (Exception e){
             throw new GlobalException(Message.ERROR);
         }
     }
