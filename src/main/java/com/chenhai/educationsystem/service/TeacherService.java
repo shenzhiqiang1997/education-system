@@ -40,7 +40,7 @@ public class TeacherService {
 
     public TeacherClassHourResult classHour(TeacherIdDto teacherIdDto) throws GlobalException {
         try {
-            List<TeacherClassHour> teacherClassHourList = teacherClassHourRepository.findAllByTeacherId(teacherIdDto.getTeacherId());
+            List<TeacherClassHour> teacherClassHourList = teacherClassHourRepository.findByTeacherId(teacherIdDto.getTeacherId());
             return new TeacherClassHourResult(teacherClassHourList);
         } catch (Exception e){
             throw new GlobalException(Message.ERROR);

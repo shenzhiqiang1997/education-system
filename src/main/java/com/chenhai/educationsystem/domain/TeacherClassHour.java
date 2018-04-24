@@ -3,14 +3,17 @@ package com.chenhai.educationsystem.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
+@Table(name = "record")
 public class TeacherClassHour {
     @Id
     @JsonIgnore
     private Integer id;
-    @Column
+    @JsonIgnore
+    @Column(name = "teacher_id")
+    private Integer teacherId;
+    @Column(name = "start_time")
     private String date;
     @Column
     private String type;
@@ -18,7 +21,7 @@ public class TeacherClassHour {
     private String period;
     @Column
     private String mark;
-    @Column
+    @Column(name = "student_name")
     private String student;
 
     public Integer getId() {
@@ -69,4 +72,11 @@ public class TeacherClassHour {
         this.student = student;
     }
 
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
+    }
 }

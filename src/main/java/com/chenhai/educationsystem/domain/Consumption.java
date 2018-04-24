@@ -6,15 +6,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "record")
 public class Consumption {
     @Id
     @JsonIgnore
     private String id;
+    @Column(name = "student_id")
+    @JsonIgnore
+    private Integer studentId;
     @Column
     private Float period;
-    @Column
+    @Column(name = "start_time")
     private String date;
     @Column
     private String type;
@@ -72,5 +77,13 @@ public class Consumption {
 
     public void setRemaining(Integer remaining) {
         this.remaining = remaining;
+    }
+
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 }

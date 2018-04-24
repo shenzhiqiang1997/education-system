@@ -31,6 +31,10 @@ public class CourseList {
     private String type;
     @Column
     private String fee;
+    @Column
+    private Float period;
+    @Column
+    private String mark;
 
     public Integer getStudentId() {
         return studentId;
@@ -118,5 +122,21 @@ public class CourseList {
 
     public void setStudent(String student) {
         this.student = student;
+    }
+
+    public Float getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Float period) {
+        this.period = period;
+    }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
     }
 }

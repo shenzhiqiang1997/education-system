@@ -8,7 +8,7 @@ public class TotalClassHourIntervalDto {
     private Integer teacherId;
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     private Date startTime;
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mmm")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     private Date endTime;
 
     public Integer getTeacherId() {

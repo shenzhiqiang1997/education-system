@@ -100,7 +100,7 @@ public class CourseService {
 
             Record record = new Record(recordDto.getStudentId(),recordDto.getCourseId(),recordDto.getTeacherId(),recordDto.getStudent(),
                     recordDto.getCourseName(),recordDto.getTeacherName(),recordDto.getStartTime(),recordDto.getEndTime(),recordDto.getType(),
-                    recordDto.getFee(),newRemaining);
+                    recordDto.getFee(),newRemaining,recordDto.getPeriod(),recordDto.getMark());
             recordRepository.save(record);
 
             takeCourseRepository.deleteById(new TakeCourseKey(recordDto.getCourseId(),recordDto.getStudentId()));

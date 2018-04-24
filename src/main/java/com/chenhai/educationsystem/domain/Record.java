@@ -30,8 +30,12 @@ public class Record {
     private Integer cost;
     @Column
     private Integer remaining;
+    @Column
+    private Float period;
+    @Column
+    private String mark;
 
-    public Record(Integer studentId, Integer courseId, Integer teacherId, String studentName, String courseName, String teacherName, String startTime, String endTime, String type, Integer cost, Integer remaining) {
+    public Record(Integer studentId, Integer courseId, Integer teacherId, String studentName, String courseName, String teacherName, String startTime, String endTime, String type, Integer cost, Integer remaining,Float period,String mark) {
         this.studentId = studentId;
         this.courseId = courseId;
         this.teacherId = teacherId;
@@ -43,6 +47,8 @@ public class Record {
         this.type = type;
         this.cost = cost;
         this.remaining = remaining;
+        this.period = period;
+        this.mark = mark;
     }
 
     public Record() {
@@ -142,5 +148,21 @@ public class Record {
 
     public void setRemaining(Integer remaining) {
         this.remaining = remaining;
+    }
+
+    public Float getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Float period) {
+        this.period = period;
+    }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
     }
 }

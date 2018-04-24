@@ -11,6 +11,24 @@ public class RecordDto {
     private String endTime;
     private String type;
     private Integer fee;
+    private Float period;
+    private String mark;
+
+    public Float getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Float period) {
+        this.period = period;
+    }
+
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
 
     public Integer getStudentId() {
         return studentId;
