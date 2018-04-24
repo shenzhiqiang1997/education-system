@@ -26,10 +26,11 @@ public class RenewRecord {
     public RenewRecord() {
     }
 
-    public RenewRecord(Date date, Integer figure, Integer remain) {
+    public RenewRecord(Date date, Integer figure, Integer remain, Integer studentId) {
         this.date = date;
         this.figure = figure;
         this.remain = remain;
+        this.studentId = studentId;
     }
 
     public Integer getStudentId() {
