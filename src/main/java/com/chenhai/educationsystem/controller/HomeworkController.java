@@ -19,7 +19,8 @@ public class HomeworkController {
     @PostMapping("/add")
     public SuccessResult add(@RequestParam("pics")MultipartFile multipartFile, @RequestParam("name")String name,
                              @RequestParam("content")String content,
-                             @RequestParam("date")String date) throws GlobalException {
-        return homeworkService.add(multipartFile,name,content,date);
+                             @RequestParam("date")String date,
+                             @RequestParam("studentIds")String studentIds) throws GlobalException {
+        return homeworkService.add(multipartFile,name,content,date,studentIds);
     }
 }

@@ -6,6 +6,8 @@ import com.chenhai.educationsystem.exception.GlobalException;
 import com.chenhai.educationsystem.message.Message;
 import com.chenhai.educationsystem.repository.HomeworkRepository;
 import com.chenhai.educationsystem.vo.SuccessResult;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Service
 public class HomeworkService {
@@ -21,7 +24,7 @@ public class HomeworkService {
     private HomeworkRepository homeworkRepository;
 
     @Transactional
-    public SuccessResult add(MultipartFile multipartFile,String name,String content,String date) throws GlobalException {
+    public SuccessResult add(MultipartFile multipartFile, String name, String content, String date, String studentIds) throws GlobalException {
         try {
             byte[] bytes = multipartFile.getBytes();
             String pics = BasePath.HOME_WORK_FOLDER + multipartFile.getOriginalFilename();
@@ -32,8 +35,13 @@ public class HomeworkService {
 
             Files.write(path,bytes);
 
-            Homework homework = new Homework(name,content,date,pics);
-            homeworkRepository.save(homework);
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<Integer> studentIdList = objectMapper.readValue(studentIds,new TypeReference<List<Integer>>(){});
+            for (Integer studentId:
+                 studentIdList) {
+                Homework homework = new Homework(name,content,date,pics,studentId);
+                homeworkRepository.save(homework);
+            }
 
             return new SuccessResult();
         } catch (Exception e){

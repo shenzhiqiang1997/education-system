@@ -16,12 +16,15 @@ public class Homework {
     private String date;
     @Column
     private String pics;
+    @Column(name = "studentId")
+    private Integer studentId;
 
-    public Homework(String name, String content, String date, String pics) {
+    public Homework(String name, String content, String date, String pics,Integer studentId) {
         this.name = name;
         this.content = content;
         this.date = date;
         this.pics = pics;
+        this.studentId = studentId;
     }
 
     public Homework() {
@@ -65,5 +68,13 @@ public class Homework {
 
     public void setPics(String pics) {
         this.pics = pics;
+    }
+
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 }
