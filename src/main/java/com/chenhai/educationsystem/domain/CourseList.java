@@ -1,5 +1,7 @@
 package com.chenhai.educationsystem.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,19 +9,60 @@ import javax.persistence.Id;
 @Entity
 public class CourseList {
     @Id
+    @JsonIgnore
     private String id;
     @Column
-    private String teacher;
+    private Integer studentId;
+    @Column
+    private Integer courseId;
+    @Column
+    private Integer teacherId;
+    @Column
+    private String student;
     @Column
     private String courseName;
+    @Column
+    private String teacher;
     @Column
     private String startTime;
     @Column
     private String endTime;
     @Column
-    private Integer courseId;
+    private String type;
     @Column
-    private String student;
+    private String fee;
+
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
+
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getFee() {
+        return fee;
+    }
+
+    public void setFee(String fee) {
+        this.fee = fee;
+    }
 
     public String getId() {
         return id;

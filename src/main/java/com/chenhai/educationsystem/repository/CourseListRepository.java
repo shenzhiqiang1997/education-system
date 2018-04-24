@@ -7,9 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface CourseListRepository extends JpaRepository<CourseList,String> {
-    @Query(value = "SELECT CONCAT(tc.studentId,tc.courseId) AS id,t.name AS teacher,c.name AS courseName, " +
-            "c.startTime AS startTime,c.endTime AS endTime,c.id AS courseId, " +
-            "s.name AS student FROM course c,take_course tc,student s,teacher t " +
+    @Query(value = "SELECT CONCAT(s.id,c.id,t.id) id,s.id studentId, " +
+            "c.id courseId,t.id teacherId,s.name student,c.name courseName, " +
+            "t.name teacher,c.startTime startTime,c.endTime endTime,c.type type,c.cost fee " +
+            "FROM course c,take_course tc,student s,teacher t " +
             "WHERE c.id =tc.courseId AND tc.studentId = s.id AND t.id = c.teacherId",
             nativeQuery = true)
     List<CourseList> findAll();
