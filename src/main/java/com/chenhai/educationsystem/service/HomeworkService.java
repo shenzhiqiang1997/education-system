@@ -37,7 +37,6 @@ public class HomeworkService {
 
             return new SuccessResult();
         } catch (Exception e){
-            e.printStackTrace();
             throw new GlobalException(Message.ERROR);
         }
     }

@@ -51,7 +51,6 @@ public class StudentService {
             feeResult.setTotal(total);
             return feeResult;
         } catch (Exception e){
-            e.printStackTrace();
             throw new GlobalException(Message.ERROR);
         }
     }

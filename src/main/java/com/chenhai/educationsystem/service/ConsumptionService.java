@@ -25,7 +25,6 @@ public class ConsumptionService {
             List<Consumption> consumptionList = consumptionRepository.findByStudentId(studentId);
             return new ConsumptionResult(consumptionList);
         } catch (Exception e){
-            e.printStackTrace();
             throw new GlobalException(Message.ERROR);
         }
     }

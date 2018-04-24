@@ -13,6 +13,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(GlobalException.class)
     @ResponseBody
     public FailureResult jsonErrorHandler(HttpServletRequest request,GlobalException e){
+        e.printStackTrace();
         return  new FailureResult(e.getMessage());
     }
 }
