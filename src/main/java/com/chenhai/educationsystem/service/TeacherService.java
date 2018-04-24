@@ -4,7 +4,8 @@ import com.chenhai.educationsystem.domain.Teacher;
 import com.chenhai.educationsystem.domain.TeacherClassHour;
 import com.chenhai.educationsystem.domain.TotalClassHour;
 import com.chenhai.educationsystem.dto.TeacherIdDto;
-import com.chenhai.educationsystem.dto.TotalClassHourDto;
+import com.chenhai.educationsystem.dto.TotalClassHourIntervalDto;
+import com.chenhai.educationsystem.dto.TotalClassHourTypeDto;
 import com.chenhai.educationsystem.exception.GlobalException;
 import com.chenhai.educationsystem.message.Message;
 import com.chenhai.educationsystem.repository.TeacherClassHourRepository;
@@ -46,9 +47,20 @@ public class TeacherService {
         }
     }
 
-    public TotalClassHourResult totalClassHour(TotalClassHourDto totalClassHourDto) throws GlobalException {
+    public TotalClassHourResult totalClassHourByType(TotalClassHourTypeDto totalClassHourTypeDto) throws GlobalException {
         try {
-            TotalClassHour totalClassHour=totalClassHourRepository.findByTeacherIdAndType(totalClassHourDto.getTeacherId(),totalClassHourDto.getType());
+            TotalClassHour totalClassHour=totalClassHourRepository.findByTeacherIdAndType(totalClassHourTypeDto.getTeacherId(), totalClassHourTypeDto.getType());
+            return new TotalClassHourResult(totalClassHour.getTotal());
+        } catch (Exception e){
+            throw new GlobalException(Message.ERROR);
+        }
+    }
+
+    public TotalClassHourResult totalClassHourByInterval(TotalClassHourIntervalDto totalClassHourIntervalDto) throws GlobalException {
+        try {
+            TotalClassHour totalClassHour =
+                    totalClassHourRepository.findByTeacherIdAndTimeInterval(totalClassHourIntervalDto.getTeacherId(),
+                    totalClassHourIntervalDto.getStartTime(),totalClassHourIntervalDto.getEndTime());
             return new TotalClassHourResult(totalClassHour.getTotal());
         } catch (Exception e){
             throw new GlobalException(Message.ERROR);

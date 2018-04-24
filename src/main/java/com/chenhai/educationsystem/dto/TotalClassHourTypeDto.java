@@ -1,6 +1,6 @@
 package com.chenhai.educationsystem.dto;
 
-public class TotalClassHourDto {
+public class TotalClassHourTypeDto {
     private Integer teacherId;
     private String type;
 
