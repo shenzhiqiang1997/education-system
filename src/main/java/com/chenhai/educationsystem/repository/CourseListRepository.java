@@ -13,7 +13,8 @@ public interface CourseListRepository extends JpaRepository<CourseList,String> {
             "c.cost fee,ch.duration period,c.description mark " +
             "FROM course c,take_course tc,student s,teacher t,classhour ch " +
             "WHERE c.id =tc.courseId AND tc.studentId = s.id " +
-            "AND t.id = c.teacherId AND ch.courseId = c.id",
+            "AND t.id = c.teacherId AND ch.courseId = c.id " +
+            "ORDER BY s.name,c.startTime",
             nativeQuery = true)
     List<CourseList> findAll();
 }
