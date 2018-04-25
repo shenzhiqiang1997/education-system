@@ -29,3 +29,6 @@
 .mvn
 mvnw
 mvnw.cmd
+
+## secret ##
+src/main/resources/*.jks
