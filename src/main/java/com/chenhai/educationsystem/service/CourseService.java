@@ -33,7 +33,7 @@ public class CourseService {
     @Autowired
     private CourseReferenceRepository courseReferenceRepository;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/hh HH:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
     @Transactional
     public SuccessResult add(CourseDto courseDto) throws GlobalException {
