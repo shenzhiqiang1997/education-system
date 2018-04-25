@@ -4,6 +4,10 @@ public class FeeResult {
     private String flag = "true";
     private Long total;
 
+    public FeeResult(Long total) {
+        this.total = total;
+    }
+
     public String getFlag() {
         return flag;
     }

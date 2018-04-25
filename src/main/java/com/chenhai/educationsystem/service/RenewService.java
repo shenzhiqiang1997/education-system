@@ -33,7 +33,7 @@ public class RenewService {
 
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public SuccessResult recharge(RenewDto renewDto) throws GlobalException {
         try {
             Student student = studentRepository.findByStudentId(renewDto.getStudentId());

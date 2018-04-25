@@ -9,7 +9,7 @@ public class TotalClassHour {
     @Id
     private Long id;
     @Column
-    private Long total;
+    private Float total;
 
     public Long getId() {
         return id;
@@ -19,11 +19,11 @@ public class TotalClassHour {
         this.id = id;
     }
 
-    public Long getTotal() {
+    public Float getTotal() {
         return total;
     }
 
-    public void setTotal(Long total) {
+    public void setTotal(Float total) {
         this.total = total;
     }
 }

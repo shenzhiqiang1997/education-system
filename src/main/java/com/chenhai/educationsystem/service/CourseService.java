@@ -35,7 +35,7 @@ public class CourseService {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public SuccessResult add(CourseDto courseDto) throws GlobalException {
         try{
             List<Integer> studentIds = courseDto.getStudentIds();
@@ -66,11 +66,11 @@ public class CourseService {
 
     public SuccessResult delete(CourseRelationDto courseRelationDto) throws GlobalException {
         try {
-            takeCourseRepository.deleteById(new TakeCourseKey(courseRelationDto.getCourseId(),courseRelationDto.getStudentId()));
+            takeCourseRepository.deleteById(new TakeCourseKey(courseRelationDto.getClassId(),courseRelationDto.getStudentId()));
 
-            long referenceCount = courseReferenceRepository.countByCourseId(courseRelationDto.getCourseId());
+            long referenceCount = courseReferenceRepository.countByCourseId(courseRelationDto.getClassId());
             if (referenceCount == 0)
-                courseRepository.deleteById(courseRelationDto.getCourseId());
+                courseRepository.deleteById(courseRelationDto.getClassId());
 
             return new SuccessResult();
         } catch (Exception e){
@@ -87,7 +87,7 @@ public class CourseService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public SuccessResult confirm(RecordDto recordDto) throws GlobalException {
         try {
             Integer studentId = recordDto.getStudentId();

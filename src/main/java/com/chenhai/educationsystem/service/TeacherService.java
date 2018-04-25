@@ -51,7 +51,7 @@ public class TeacherService {
         try {
             TotalClassHour totalClassHour=totalClassHourRepository.findByTeacherIdAndType(totalClassHourTypeDto.getTeacherId(), totalClassHourTypeDto.getType());
             if (totalClassHour == null){
-                return new TotalClassHourResult(0L);
+                return new TotalClassHourResult(0F);
             }
             return new TotalClassHourResult(totalClassHour.getTotal());
         } catch (Exception e){
@@ -64,6 +64,10 @@ public class TeacherService {
             TotalClassHour totalClassHour =
                     totalClassHourRepository.findByTeacherIdAndTimeInterval(totalClassHourIntervalDto.getTeacherId(),
                     totalClassHourIntervalDto.getStartTime(),totalClassHourIntervalDto.getEndTime());
+            if (totalClassHour == null){
+                return new TotalClassHourResult(0F);
+            }
+
             return new TotalClassHourResult(totalClassHour.getTotal());
         } catch (Exception e){
             throw new GlobalException(Message.ERROR);

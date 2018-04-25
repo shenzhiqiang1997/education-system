@@ -2,8 +2,10 @@ package com.chenhai.educationsystem.service;
 
 import com.chenhai.educationsystem.constant.BasePath;
 import com.chenhai.educationsystem.domain.Homework;
+import com.chenhai.educationsystem.domain.HomeworkDeleting;
 import com.chenhai.educationsystem.exception.GlobalException;
 import com.chenhai.educationsystem.message.Message;
+import com.chenhai.educationsystem.repository.HomeworkDeletingRepository;
 import com.chenhai.educationsystem.repository.HomeworkRepository;
 import com.chenhai.educationsystem.vo.SuccessResult;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -22,8 +24,10 @@ import java.util.List;
 public class HomeworkService {
     @Autowired
     private HomeworkRepository homeworkRepository;
+    @Autowired
+    private HomeworkDeletingRepository homeworkDeletingRepository;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public SuccessResult add(MultipartFile multipartFile, String name, String content, String date, String studentIds) throws GlobalException {
         try {
             byte[] bytes = multipartFile.getBytes();
@@ -47,5 +51,21 @@ public class HomeworkService {
         } catch (Exception e){
             throw new GlobalException(Message.ERROR);
         }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteOnSchedule() throws Exception{
+        List<HomeworkDeleting> homeworkList = homeworkDeletingRepository.findTimeoutList();
+        for (HomeworkDeleting homework:
+                homeworkList) {
+            String filePath = homework.getPics();
+            Path path = Paths.get(filePath);
+
+            if (Files.exists(path))
+                Files.delete(path);
+        }
+
+        if (homeworkList != null&& homeworkList.size() != 0)
+            homeworkDeletingRepository.deleteTimeoutList();
     }
 }

@@ -2,9 +2,9 @@ package com.chenhai.educationsystem.vo;
 
 public class TotalClassHourResult {
     private String flag = "true";
-    private Long total;
+    private Float total;
 
-    public TotalClassHourResult(Long total) {
+    public TotalClassHourResult(Float total) {
         this.total = total;
     }
 
@@ -16,11 +16,11 @@ public class TotalClassHourResult {
         this.flag = flag;
     }
 
-    public Long getTotal() {
+    public Float getTotal() {
         return total;
     }
 
-    public void setTotal(Long total) {
+    public void setTotal(Float total) {
         this.total = total;
     }
 }

@@ -1,15 +1,15 @@
 package com.chenhai.educationsystem.dto;
 
 public class CourseRelationDto {
-    private Integer courseId;
+    private Integer classId;
     private Integer studentId;
 
-    public Integer getCourseId() {
-        return courseId;
+    public Integer getClassId() {
+        return classId;
     }
 
-    public void setCourseId(Integer courseId) {
-        this.courseId = courseId;
+    public void setClassId(Integer classId) {
+        this.classId = classId;
     }
 
     public Integer getStudentId() {

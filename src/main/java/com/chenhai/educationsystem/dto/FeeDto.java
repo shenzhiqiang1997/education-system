@@ -1,9 +1,15 @@
 package com.chenhai.educationsystem.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class FeeDto {
     private Integer studentId;
-    private String startTime;
-    private String endTime;
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+    private Date startTime;
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+    private Date endTime;
 
     public Integer getStudentId() {
         return studentId;
@@ -13,19 +19,19 @@ public class FeeDto {
         this.studentId = studentId;
     }
 
-    public String getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 }
