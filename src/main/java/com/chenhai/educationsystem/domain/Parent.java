@@ -1,5 +1,7 @@
 package com.chenhai.educationsystem.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,9 @@ public class Parent {
     private Integer studentId;
     @Column
     private String mark;
+    @Column
+    @JsonIgnore
+    private String wechatId;
 
     public Parent(String name, Integer studentId, String mark) {
         this.name = name;
@@ -53,5 +58,13 @@ public class Parent {
 
     public String getMark() {
         return mark;
+    }
+
+    public String getWechatId() {
+        return wechatId;
+    }
+
+    public void setWechatId(String wechatId) {
+        this.wechatId = wechatId;
     }
 }

@@ -17,6 +17,9 @@ public class Student {
     @Column
     @JsonIgnore
     private String mark;
+    @Column
+    @JsonIgnore
+    private String wechatId;
 
     public Student(Integer studentId, Integer remaining, String studentName) {
         this.studentId = studentId;
@@ -62,5 +65,13 @@ public class Student {
 
     public void setMark(String mark) {
         this.mark = mark;
+    }
+
+    public String getWechatId() {
+        return wechatId;
+    }
+
+    public void setWechatId(String wechatId) {
+        this.wechatId = wechatId;
     }
 }

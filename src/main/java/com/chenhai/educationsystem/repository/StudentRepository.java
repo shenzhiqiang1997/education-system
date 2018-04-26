@@ -5,4 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StudentRepository extends JpaRepository<Student,Integer> {
     Student findByStudentId(Integer studentId);
+    long countByWechatId(String wechatId);
+    long countByMark(String boundId);
+    Student findByMark(String boundId);
 }

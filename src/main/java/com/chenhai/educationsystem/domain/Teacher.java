@@ -15,6 +15,9 @@ public class Teacher {
     @Column
     @JsonIgnore
     private String mark;
+    @Column
+    @JsonIgnore
+    private String wechatId;
 
     public Teacher(String teacherName, String mark) {
         this.teacherName = teacherName;
@@ -46,5 +49,13 @@ public class Teacher {
 
     public void setMark(String mark) {
         this.mark = mark;
+    }
+
+    public String getWechatId() {
+        return wechatId;
+    }
+
+    public void setWechatId(String wechatId) {
+        this.wechatId = wechatId;
     }
 }
