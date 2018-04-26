@@ -17,11 +17,14 @@ public class TestFeedback {
     private String pics;
     @Column(name = "uploadTime")
     private Date uploadTime=new Date();
+    @Column
+    private String name;
 
-    public TestFeedback(String wechatId, String content, String pics) {
+    public TestFeedback(String wechatId, String content, String pics,String name) {
         this.wechatId = wechatId;
         this.content = content;
         this.pics = pics;
+        this.name = name;
     }
 
     public Integer getId() {
@@ -54,5 +57,21 @@ public class TestFeedback {
 
     public void setPics(String pics) {
         this.pics = pics;
+    }
+
+    public Date getUploadTime() {
+        return uploadTime;
+    }
+
+    public void setUploadTime(Date uploadTime) {
+        this.uploadTime = uploadTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

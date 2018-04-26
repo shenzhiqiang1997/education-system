@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -26,13 +28,16 @@ public class HomeworkService {
     private HomeworkRepository homeworkRepository;
     @Autowired
     private HomeworkDeletingRepository homeworkDeletingRepository;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-");
 
     @Transactional(rollbackFor = Exception.class)
     public SuccessResult add(MultipartFile multipartFile, String name, String content, String date, String studentIds) throws GlobalException {
         try {
             byte[] bytes = multipartFile.getBytes();
-            String pics = BasePath.HOME_WORK_FOLDER + multipartFile.getOriginalFilename();
-            Path path = Paths.get(pics);
+            Date timestamp = new Date();
+            String localPics = BasePath.HOME_WORK_FOLDER+sdf.format(timestamp)+multipartFile.getOriginalFilename();
+            String remotePics = BasePath.HOME_WORK_URL+sdf.format(timestamp)+multipartFile.getOriginalFilename();
+            Path path = Paths.get(localPics);
             Path basePath = Paths.get(BasePath.HOME_WORK_FOLDER);
             if (!Files.exists(basePath))
                 Files.createDirectory(basePath);
@@ -43,7 +48,7 @@ public class HomeworkService {
             List<Integer> studentIdList = objectMapper.readValue(studentIds,new TypeReference<List<Integer>>(){});
             for (Integer studentId:
                  studentIdList) {
-                Homework homework = new Homework(name,content,date,pics,studentId);
+                Homework homework = new Homework(name,content,date, remotePics,studentId);
                 homeworkRepository.save(homework);
             }
 
@@ -59,7 +64,7 @@ public class HomeworkService {
         for (HomeworkDeleting homework:
                 homeworkList) {
             String filePath = homework.getPics();
-            Path path = Paths.get(filePath);
+            Path path = Paths.get(filePath.replace(BasePath.STATIC_RESOURCE_BASE_URL,BasePath.STATIC_RESOURCE_FOLDER));
 
             if (Files.exists(path))
                 Files.delete(path);

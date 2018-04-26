@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Service
 public class FeedbackService {
@@ -28,47 +30,52 @@ public class FeedbackService {
     private HomeworkFeedbackRepository homeworkFeedbackRepository;
     @Autowired
     private TestFeedbackRepository testFeedbackRepository;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-");
 
     @Transactional
-    public SuccessResult add(String studentId, String feedback,
+    public SuccessResult add(String studentId, String name, String feedback,
                              MultipartFile multipartFile, String type) throws GlobalException {
         try {
             String fileName = multipartFile.getOriginalFilename();
             byte[] bytes = multipartFile.getBytes();
+            Date timestamp = new Date();
             if (Type.COURSE_FEEDBACK.equalsIgnoreCase(type)){
-                String pics = BasePath.COURSE_FEEDBACK_FOLDER + fileName;
+                String localPics = BasePath.COURSE_FEEDBACK_FOLDER+sdf.format(timestamp) + fileName;
+                String remotePics = BasePath.COURSE_FEEDBACK_URL+sdf.format(timestamp) +fileName;
                 Path basePath = Paths.get(BasePath.COURSE_FEEDBACK_FOLDER);
-                Path path = Paths.get(pics);
+                Path path = Paths.get(localPics);
                 if (!Files.exists(basePath))
                     Files.createDirectory(basePath);
 
                 Files.write(path,bytes);
 
-                CourseFeedback courseFeedback = new CourseFeedback(studentId,feedback,pics);
+                CourseFeedback courseFeedback = new CourseFeedback(studentId,feedback, remotePics,name);
                 courseFeedbackRepository.save(courseFeedback);
 
                 return new SuccessResult();
             } else if (Type.HOMEWORK_FEEDBACK.equalsIgnoreCase(type)){
-                String pics = BasePath.HOME_WORK_FOLDER + fileName;
+                String localPics = BasePath.HOMEWORK_FEEDBACK_FOLDER+sdf.format(timestamp) +fileName;
+                String remotePics = BasePath.HOMEWORK_FEEDBACK_URL+sdf.format(timestamp) + fileName;
                 Path basePath = Paths.get(BasePath.HOMEWORK_FEEDBACK_FOLDER);
-                Path path = Paths.get(pics);
+                Path path = Paths.get(localPics);
                 if (!Files.exists(basePath))
                     Files.createDirectory(basePath);
                 Files.write(path,bytes);
 
-                HomeworkFeedback homeworkFeedback = new HomeworkFeedback(studentId,feedback,pics);
+                HomeworkFeedback homeworkFeedback = new HomeworkFeedback(studentId,feedback, remotePics,name);
                 homeworkFeedbackRepository.save(homeworkFeedback);
 
                 return new SuccessResult();
             } else if (Type.TEST_FEEDBACK.equalsIgnoreCase(type)){
-                String pics = BasePath.TEST_FEEDBACK_FOLDER + fileName;
+                String localPics = BasePath.TEST_FEEDBACK_FOLDER+sdf.format(timestamp) +fileName;
+                String remotePics = BasePath.TEST_FEEDBACK_URL+sdf.format(timestamp) + fileName;
                 Path basePath = Paths.get(BasePath.TEST_FEEDBACK_FOLDER);
-                Path path = Paths.get(pics);
+                Path path = Paths.get(localPics);
                 if (!Files.exists(basePath))
                     Files.createDirectory(basePath);
                 Files.write(path,bytes);
 
-                TestFeedback testFeedback = new TestFeedback(studentId,feedback,pics);
+                TestFeedback testFeedback = new TestFeedback(studentId,feedback, remotePics,name);
                 testFeedbackRepository.save(testFeedback);
 
                 return new SuccessResult();

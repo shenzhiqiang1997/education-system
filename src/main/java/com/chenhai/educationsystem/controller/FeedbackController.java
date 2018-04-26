@@ -17,9 +17,10 @@ public class FeedbackController {
     private FeedbackService feedbackService;
     @PostMapping("/add")
     public SuccessResult add(@RequestParam("studentId") String studentId,
+                             @RequestParam("courseName") String name,
                              @RequestParam("feedback") String feedback,
                              @RequestParam(value = "pic",required = false)MultipartFile multipartFile,
                              @RequestParam("type") String type) throws GlobalException {
-        return feedbackService.add(studentId,feedback,multipartFile,type);
+        return feedbackService.add(studentId,name,feedback,multipartFile,type);
     }
 }
