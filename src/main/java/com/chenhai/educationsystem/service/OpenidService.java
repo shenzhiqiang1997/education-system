@@ -9,7 +9,6 @@ import com.chenhai.educationsystem.domain.Teacher;
 import com.chenhai.educationsystem.dto.CodeDto;
 import com.chenhai.educationsystem.dto.OpenidDto;
 import com.chenhai.educationsystem.dto.OpenidIdentityDto;
-import com.chenhai.educationsystem.dto.OpenidJson;
 import com.chenhai.educationsystem.exception.GlobalException;
 import com.chenhai.educationsystem.message.Message;
 import com.chenhai.educationsystem.repository.ParentRepository;
@@ -20,7 +19,8 @@ import com.chenhai.educationsystem.vo.OpenidResult;
 import com.chenhai.educationsystem.vo.SuccessMessageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+
+import java.net.URL;
 
 @Service
 public class OpenidService {
@@ -30,23 +30,16 @@ public class OpenidService {
     private TeacherRepository teacherRepository;
     @Autowired
     private ParentRepository parentRepository;
-    @Autowired
-    private RestTemplate restTemplate;
 
-    public OpenidResult get(CodeDto codeDto) throws GlobalException {
-        try {
-            String code = codeDto.getCode();
+    public OpenidResult get(CodeDto codeDto) throws Exception {
+        String code = codeDto.getCode();
 
-            String openidUrl = RequestURL.OPENID_URL
-                    .replace("APPID",RequestParameter.APP_ID)
-                    .replace("SECRET",RequestParameter.SECRET)
-                    .replace("CODE",code);
-            OpenidJson openidJson = restTemplate.getForObject(openidUrl,OpenidJson.class);
-
-            return new OpenidResult(openidJson.getOpenid());
-        } catch (Exception e){
-            throw new GlobalException(Message.ERROR);
-        }
+        String openidUrl = RequestURL.OPENID_URL
+                .replace("APPID",RequestParameter.APP_ID)
+                .replace("SECRET",RequestParameter.SECRET)
+                .replace("CODE",code);
+        URL url = new URL(openidUrl);
+        return new OpenidResult("1");
     }
 
 

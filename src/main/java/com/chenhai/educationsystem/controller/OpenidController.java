@@ -21,7 +21,7 @@ public class OpenidController {
     private OpenidService openidService;
 
     @PostMapping("/get")
-    public OpenidResult get(@RequestBody CodeDto codeDto) throws GlobalException {
+    public OpenidResult get(@RequestBody CodeDto codeDto) throws Exception {
         return openidService.get(codeDto);
     }
 
