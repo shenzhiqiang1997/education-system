@@ -67,4 +67,15 @@ public class Parent {
     public void setWechatId(String wechatId) {
         this.wechatId = wechatId;
     }
+
+    @Override
+    public String toString() {
+        return "Parent{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", studentId=" + studentId +
+                ", mark='" + mark + '\'' +
+                ", wechatId='" + wechatId + '\'' +
+                '}';
+    }
 }

@@ -1,6 +1,8 @@
 package com.chenhai.educationsystem;
 
 import com.chenhai.educationsystem.filter.CrossFilter;
+import com.chenhai.educationsystem.util.AccessTokenUtil;
+import com.chenhai.educationsystem.util.DateUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -30,4 +32,15 @@ public class EducationSystemApplication{
     public RestTemplate restTemplate(RestTemplateBuilder builder){
         return builder.build();
     }
+
+    @Bean
+    public AccessTokenUtil accessTokenUtil(){
+        return new AccessTokenUtil();
+    }
+
+    @Bean
+    public DateUtil dateUtil(){
+        return new DateUtil();
+    }
+
 }

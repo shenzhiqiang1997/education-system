@@ -7,4 +7,5 @@ public interface ParentRepository extends JpaRepository<Parent,Integer> {
     long countByWechatId(String wechatId);
     long countByMark(String boundId);
     Parent findByMark(String boundId);
+    Parent findByStudentId(Integer studentId);
 }
