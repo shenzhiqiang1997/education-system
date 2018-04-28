@@ -47,12 +47,12 @@ public class TemplateMessageService {
     private static int tryTime=20;
 
     public void sendTemplateMessageDaily() throws Exception {
-        /*String accessToken=accessTokenUtil.getNewestAccessToken(tryTime);
+        String accessToken=accessTokenUtil.getNewestAccessToken(tryTime);
 
         if (accessToken==null)
-            return;*/
+            return;
 
-        String accessToken = "9_zdshGy74oH_PvF73TIQGV4kn6PvK1OeqClnyaanhlQo8tji-9ZOGZKcDwN4jdNqk6T43NZkaXxMriDvVCt7BapzKIHCZzkAJaHQIK6fjKz1OiMXa1OY760hFrJjKS2Z5Ml9VNnXoF60WaUNeBLIdABAHRO";
+        /*String accessToken = "9_zdshGy74oH_PvF73TIQGV4kn6PvK1OeqClnyaanhlQo8tji-9ZOGZKcDwN4jdNqk6T43NZkaXxMriDvVCt7BapzKIHCZzkAJaHQIK6fjKz1OiMXa1OY760hFrJjKS2Z5Ml9VNnXoF60WaUNeBLIdABAHRO";*/
 
         String templateMessageUrl = RequestURL.TEMPLATE_MESSAGE_URL+accessToken;
         Date tomorrowStartTime = dateUtil.getTomorrowBegin();
@@ -64,12 +64,12 @@ public class TemplateMessageService {
     }
 
     public void sendTemplateMessageWeekly() throws Exception{
-        /*String accessToken=accessTokenUtil.getNewestAccessToken(tryTime);
+        String accessToken=accessTokenUtil.getNewestAccessToken(tryTime);
 
         if (accessToken==null)
-            return;*/
+            return;
 
-        String accessToken = "9_zdshGy74oH_PvF73TIQGV4kn6PvK1OeqClnyaanhlQo8tji-9ZOGZKcDwN4jdNqk6T43NZkaXxMriDvVCt7BapzKIHCZzkAJaHQIK6fjKz1OiMXa1OY760hFrJjKS2Z5Ml9VNnXoF60WaUNeBLIdABAHRO";
+        /*String accessToken = "9_zdshGy74oH_PvF73TIQGV4kn6PvK1OeqClnyaanhlQo8tji-9ZOGZKcDwN4jdNqk6T43NZkaXxMriDvVCt7BapzKIHCZzkAJaHQIK6fjKz1OiMXa1OY760hFrJjKS2Z5Ml9VNnXoF60WaUNeBLIdABAHRO";*/
 
         String templateMessageUrl = RequestURL.TEMPLATE_MESSAGE_URL+accessToken;
         sendFeeMessage(templateMessageUrl);

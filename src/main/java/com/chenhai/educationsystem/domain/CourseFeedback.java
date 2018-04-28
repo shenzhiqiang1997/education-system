@@ -27,6 +27,12 @@ public class CourseFeedback {
         this.name = name;
     }
 
+    public CourseFeedback(String wechatId, String content, String name) {
+        this.wechatId = wechatId;
+        this.content = content;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -19,8 +19,8 @@ public class FeedbackController {
     public SuccessResult add(@RequestParam("studentId") String studentId,
                              @RequestParam("courseName") String name,
                              @RequestParam("feedback") String feedback,
-                             @RequestParam(value = "pic",required = false)MultipartFile multipartFile,
-                             @RequestParam("type") String type) throws GlobalException {
+                             @RequestParam(name = "pic",required = false)MultipartFile multipartFile,
+                             @RequestParam("type") String type) throws Exception {
         return feedbackService.add(studentId,name,feedback,multipartFile,type);
     }
 }

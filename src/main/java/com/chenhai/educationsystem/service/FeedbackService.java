@@ -34,56 +34,70 @@ public class FeedbackService {
 
     @Transactional
     public SuccessResult add(String studentId, String name, String feedback,
-                             MultipartFile multipartFile, String type) throws GlobalException {
-        try {
-            String fileName = multipartFile.getOriginalFilename();
-            byte[] bytes = multipartFile.getBytes();
+                             MultipartFile multipartFile, String type) throws Exception {
+            String fileName = null;
+            byte[] bytes = null;
+
+            if (multipartFile!=null) {
+                bytes = multipartFile.getBytes();
+                fileName = multipartFile.getOriginalFilename();
+            }
             Date timestamp = new Date();
             if (Type.COURSE_FEEDBACK.equalsIgnoreCase(type)){
-                String localPics = BasePath.COURSE_FEEDBACK_FOLDER+sdf.format(timestamp) + fileName;
-                String remotePics = BasePath.COURSE_FEEDBACK_URL+sdf.format(timestamp) +fileName;
-                Path basePath = Paths.get(BasePath.COURSE_FEEDBACK_FOLDER);
-                Path path = Paths.get(localPics);
-                if (!Files.exists(basePath))
-                    Files.createDirectory(basePath);
+                CourseFeedback courseFeedback;
+                if (bytes !=null){
+                    String localPics = BasePath.COURSE_FEEDBACK_FOLDER+sdf.format(timestamp) + fileName;
+                    String remotePics = BasePath.COURSE_FEEDBACK_URL+sdf.format(timestamp) +fileName;
+                    Path basePath = Paths.get(BasePath.COURSE_FEEDBACK_FOLDER);
+                    Path path = Paths.get(localPics);
+                    if (!Files.exists(basePath))
+                        Files.createDirectory(basePath);
 
-                Files.write(path,bytes);
+                    Files.write(path,bytes);
+                    courseFeedback = new CourseFeedback(studentId,feedback, remotePics,name);
+                }else {
+                    courseFeedback = new CourseFeedback(studentId,feedback,name);
+                }
 
-                CourseFeedback courseFeedback = new CourseFeedback(studentId,feedback, remotePics,name);
                 courseFeedbackRepository.save(courseFeedback);
 
                 return new SuccessResult();
             } else if (Type.HOMEWORK_FEEDBACK.equalsIgnoreCase(type)){
-                String localPics = BasePath.HOMEWORK_FEEDBACK_FOLDER+sdf.format(timestamp) +fileName;
-                String remotePics = BasePath.HOMEWORK_FEEDBACK_URL+sdf.format(timestamp) + fileName;
-                Path basePath = Paths.get(BasePath.HOMEWORK_FEEDBACK_FOLDER);
-                Path path = Paths.get(localPics);
-                if (!Files.exists(basePath))
-                    Files.createDirectory(basePath);
-                Files.write(path,bytes);
-
-                HomeworkFeedback homeworkFeedback = new HomeworkFeedback(studentId,feedback, remotePics,name);
+                HomeworkFeedback homeworkFeedback;
+                if (bytes !=null) {
+                    String localPics = BasePath.HOMEWORK_FEEDBACK_FOLDER + sdf.format(timestamp) + fileName;
+                    String remotePics = BasePath.HOMEWORK_FEEDBACK_URL + sdf.format(timestamp) + fileName;
+                    Path basePath = Paths.get(BasePath.HOMEWORK_FEEDBACK_FOLDER);
+                    Path path = Paths.get(localPics);
+                    if (!Files.exists(basePath))
+                        Files.createDirectory(basePath);
+                    Files.write(path, bytes);
+                    homeworkFeedback = new HomeworkFeedback(studentId,feedback, remotePics,name);
+                }else {
+                    homeworkFeedback = new HomeworkFeedback(studentId,feedback,name);
+                }
                 homeworkFeedbackRepository.save(homeworkFeedback);
 
                 return new SuccessResult();
             } else if (Type.TEST_FEEDBACK.equalsIgnoreCase(type)){
-                String localPics = BasePath.TEST_FEEDBACK_FOLDER+sdf.format(timestamp) +fileName;
-                String remotePics = BasePath.TEST_FEEDBACK_URL+sdf.format(timestamp) + fileName;
-                Path basePath = Paths.get(BasePath.TEST_FEEDBACK_FOLDER);
-                Path path = Paths.get(localPics);
-                if (!Files.exists(basePath))
-                    Files.createDirectory(basePath);
-                Files.write(path,bytes);
-
-                TestFeedback testFeedback = new TestFeedback(studentId,feedback, remotePics,name);
+                TestFeedback testFeedback;
+                if (bytes !=null) {
+                    String localPics = BasePath.TEST_FEEDBACK_FOLDER + sdf.format(timestamp) + fileName;
+                    String remotePics = BasePath.TEST_FEEDBACK_URL + sdf.format(timestamp) + fileName;
+                    Path basePath = Paths.get(BasePath.TEST_FEEDBACK_FOLDER);
+                    Path path = Paths.get(localPics);
+                    if (!Files.exists(basePath))
+                        Files.createDirectory(basePath);
+                    Files.write(path, bytes);
+                    testFeedback = new TestFeedback(studentId,feedback, remotePics,name);
+                }else {
+                    testFeedback = new TestFeedback(studentId,feedback,name);
+                }
                 testFeedbackRepository.save(testFeedback);
 
                 return new SuccessResult();
             }
 
             throw new GlobalException(Message.ERROR);
-        } catch (Exception e){
-            throw new GlobalException(Message.ERROR);
-        }
     }
 }

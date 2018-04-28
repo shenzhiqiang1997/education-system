@@ -27,6 +27,12 @@ public class HomeworkFeedback {
         this.name = name;
     }
 
+    public HomeworkFeedback(String wechatId, String content, String name) {
+        this.wechatId = wechatId;
+        this.content = content;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }

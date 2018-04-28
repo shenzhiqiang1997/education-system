@@ -14,21 +14,21 @@ public class Scheduler {
     @Autowired
     private TemplateMessageService templateMessageService;
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 0 * * ?")/*
     /*@Scheduled(initialDelay = 10000,fixedRate = 5000)*/
     public void homeworkDeleteScheduler() throws Exception {
         homeworkService.deleteOnSchedule();
     }
 
-    /*@Scheduled(cron = "0 0 19 * * ?")*/
-    @Scheduled(initialDelay = 10000,fixedRate = 20000)
+    @Scheduled(cron = "0 0 19 * * ?")
+    /*@Scheduled(initialDelay = 10000,fixedRate = 30000)*/
     public void templateMessageDailyScheduler() throws Exception{
         templateMessageService.sendTemplateMessageDaily();
     }
 
-    /*@Scheduled(cron = "0 0 7 ? * MON")*//*
-    @Scheduled(initialDelay = 10000,fixedRate = 20000)
+    @Scheduled(cron = "0 0 7 ? * MON")
+    /*@Scheduled(initialDelay = 10000,fixedRate = 30000)*/
     public void templateMessageWeeklyScheduler() throws Exception{
         templateMessageService.sendTemplateMessageWeekly();
-    }*/
+    }
 }

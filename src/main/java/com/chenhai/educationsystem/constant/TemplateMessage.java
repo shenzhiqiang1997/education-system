@@ -1,7 +1,7 @@
 package com.chenhai.educationsystem.constant;
 
 public interface TemplateMessage {
-    String HOMEWORK_STUDENT_FIRST = "学生您好, 您有新的作业已发布，请查收。";
+    String HOMEWORK_STUDENT_FIRST = "同学您好, 您有新的作业已发布，请查收。";
 
     String HOMEWORK_STUDENT_KEYWORD3 = "的作业。";
     String HOMEWORK_STUDENT_KEYWORD4 = "请点击我的主页，我的作业查看。";
