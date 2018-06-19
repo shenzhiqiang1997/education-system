@@ -26,9 +26,10 @@ public class Scheduler {
         templateMessageService.sendTemplateMessageDaily();
     }
 
-    @Scheduled(cron = "0 0 7 ? * MON")
+    @Scheduled(cron = "0 0 19 ? * TUE")
     /*@Scheduled(initialDelay = 10000,fixedRate = 30000)*/
     public void templateMessageWeeklyScheduler() throws Exception{
         templateMessageService.sendTemplateMessageWeekly();
     }
+
 }

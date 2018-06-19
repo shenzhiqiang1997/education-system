@@ -93,7 +93,7 @@ public class CourseService {
             Integer studentId = recordDto.getStudentId();
             Student student = studentRepository.findByStudentId(studentId);
             Integer remaining = student.getRemaining();
-            Integer fee = (int)(recordDto.getFee()* recordDto.getPeriod());
+            Integer fee = (int)((double)recordDto.getFee()*recordDto.getPeriod());
             Integer newRemaining = remaining - fee;
             student.setRemaining(newRemaining);
             studentRepository.save(student);
@@ -103,6 +103,7 @@ public class CourseService {
                     fee,newRemaining,recordDto.getPeriod(),recordDto.getMark());
             recordRepository.save(record);
 
+            System.out.println(record);
             takeCourseRepository.deleteById(new TakeCourseKey(recordDto.getCourseId(),recordDto.getStudentId()));
 
             return new SuccessResult();

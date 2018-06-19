@@ -14,7 +14,7 @@ public interface TemplateMessage {
     String FEE_PARENT_FIRST1 = "同学家长您好，";
     String FEE_PARENT_FIRST2 ="同学的学费已用完，请您尽快续缴费，谢谢。";
 
-    String FEE_REMARK = "如有任何疑问，请联系微信缴费（18628331447），谢谢。";
+    String FEE_REMARK = "如有任何疑问，请联系微信（18628331447），谢谢。";
 
 
     String COURSE_STUDENT_FIRST = "同学您好，您明天有课程如下，请准时上课，谢谢。";
